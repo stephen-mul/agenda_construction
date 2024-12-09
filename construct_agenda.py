@@ -39,7 +39,7 @@ def combine_agenda(todo_dates, todo_content, agenda_content):
     for i in range(len(todo_dates)):
         schedule_list.append(todo_dates[i])
         schedule_list.append('\n')
-        schedule_list.append(todo_content[i])
+        schedule_list.append('          ' + todo_content[i])
         schedule_list.append('\n')
     schedule_list.append('***/')
     schedule = ''.join(schedule_list)
