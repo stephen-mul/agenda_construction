@@ -3,6 +3,7 @@
 
 import sys
 import re
+import yaml
 from pathlib import Path
 
 def search_days(content):
@@ -13,7 +14,6 @@ def search_days(content):
         if day_search:
             day_start = day_search.start()
             date = content[day_start: day_start+10]
-            print(date)
             dates.append(date)
     day_content = []
     ### grab content after each date but before following, shoudl not contain dates themselves ###
@@ -50,10 +50,11 @@ def combine_agenda(todo_dates, todo_content, agenda_content):
 ### load output of gcalcli - must be piped to script ###
 def main():
     todo = sys.stdin.read()
-
-    print(f'Agenda in python: {todo}')
-
-    agenda_path = '/home/stephen/Documents/vault/Agenda.md'
+    ### load config.yaml ###
+    config_path = Path(__file__).parent / 'config.yaml'
+    with open(config_path, 'r') as config_file:
+        config = yaml.safe_load(config_file)
+    agenda_path = config['agenda_path']
 
     days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -62,12 +63,7 @@ def main():
 
     agenda = open(agenda_path, 'r')
     agenda_content = agenda.read()
-    ### clean agenda - remove schedule section between /*** and ***/, on different lines ###
-    #agenda_content = re.sub(r'/\*\*\*.*\*\*\*/', '', agenda_content, flags=re.DOTALL)
-    print(f'agenda content: {agenda_content}')
     todo_dates, todo_content = search_days(todo)
-    print(f'todo dates: {todo_dates}')
-    print(f'todo content: {todo_content}') 
     agenda_content = combine_agenda(todo_dates, todo_content, agenda_content)
     print(f'agenda content: {agenda_content}')
     agenda = open(agenda_path, 'w')
