@@ -22,7 +22,7 @@ fi
 sed -i "s|some_directory/construct_agenda.py|$CONSTRUCT_AGENDA_PATH|" "$AGENDA_CONSTRUCTION_PATH"
 
 # Prompt the user for the path to Agenda.md
-read -p "Please enter the path to your Agenda.md file: " AGENDA_MD_PATH
+read -e -p "Please enter the path to your Agenda.md file: " AGENDA_MD_PATH
 
 # Create or update config.yaml with the agenda_path
 cat <<EOL > "$CONFIG_PATH"
