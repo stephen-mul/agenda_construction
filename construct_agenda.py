@@ -56,11 +56,6 @@ def main():
         config = yaml.safe_load(config_file)
     agenda_path = config['agenda_path']
 
-    days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
     agenda = open(agenda_path, 'r')
     agenda_content = agenda.read()
     todo_dates, todo_content = search_days(todo)
