@@ -7,4 +7,4 @@ echo "Current day: $current_day"
 echo "Two days later: $two_days_later"
 
 # Fetch the agenda for Monday and Tuesday, stripping ANSI codes, echo each line to agenda.md file
-gcalcli agenda $current_day $two_days_later | sed -e 's/\x1b\[[0-9;]*m//g' | /home/stephen/local_workdir/personal/agenda_construction/construct_agenda.py
+gcalcli agenda $current_day $two_days_later | sed -e 's/\x1b\[[0-9;]*m//g' | some_directory/construct_agenda.py
